@@ -1,6 +1,7 @@
 let lat;
 let lon;
 const currentWeather = document.querySelector('.current-conditions');
+const weeklyForecast = document.querySelector('.forecast');
 // const currentWeather1 = document.getElementById('current');
 // console.log(theWeather);
 // console.log(currentWeather1);
@@ -51,6 +52,22 @@ if(!navigator.geolocation){
 
       const sixPm = forecast.list.filter (f => f.dt_txt.split(" ")[1] === "18:00:00")
       console.log(sixPm)
+      sixPm.forEach(day => {
+        let date = new Date(day.dt_txt)
+        let days = date.toLocaleString("en", { weekday: "long" });
+        weeklyForecast.insertAdjacentHTML('beforeend', `
+        <div class="day">
+        <h3>${days}</h3>
+        <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" />
+        <div class="description">${day.weather[0].description}</div>
+        <div class="temp">
+          <span class="high">${day.main.temp_max}℃</span>/<span class="low">${day.main.temp_min}℃</span>
+        </div>
+      </div>
+        `)
+        console.log(date.toLocaleString("en", { weekday: "long" }))
+      })
+
       // if()
     })
   })
