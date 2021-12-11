@@ -30,8 +30,8 @@ if(!navigator.geolocation){
   console.log('Error, location not allowed');
 } else {
   navigator.geolocation.getCurrentPosition((position) => {
-    lat = position.coords.latitude
-    lon = position.coords.longitude
+    lat = position.coords.latitude;
+    lon = position.coords.longitude;
     console.log(lat, lon);
     getWeatherLocation(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=45db684b0d24f95132a33d44dbd10e15`).then((weatherData) => {
       // let deg = `${(weatherData.main.temp - 32) * 5/9}`;
@@ -44,6 +44,14 @@ if(!navigator.geolocation){
       </div>
       `)
       console.log(weatherData);
+    })
+
+    getWeeklyForecast(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=45db684b0d24f95132a33d44dbd10e15`).then((forecast) => {
+      console.log(forecast.list);
+
+      const sixPm = forecast.list.filter (f => f.dt_txt.split(" ")[1] === "18:00:00")
+      console.log(sixPm)
+      // if()
     })
   })
 }
