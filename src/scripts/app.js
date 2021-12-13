@@ -42,8 +42,37 @@ if(!navigator.geolocation){
     })
 
     getWeeklyForecast(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=45db684b0d24f95132a33d44dbd10e15`).then((forecast) => {
+  
+      const sixPm = forecast.list.filter (f => f.dt_txt.split(" ")[1] === "18:00:00");
+      while(forecast.list.length){
 
-      const sixPm = forecast.list.filter (f => f.dt_txt.split(" ")[1] === "18:00:00")
+        const dailyForecast = forecast.list.reverse().splice(0,8);
+        console.log(dailyForecast)
+        let maxTemp = [
+          dailyForecast[7].main.temp_max,
+          dailyForecast[6].main.temp_max,
+          dailyForecast[5].main.temp_max,
+          dailyForecast[4].main.temp_max,
+          dailyForecast[3].main.temp_max,
+          dailyForecast[2].main.temp_max,
+          dailyForecast[1].main.temp_max,
+          dailyForecast[0].main.temp_max
+        ];
+
+         max.push(Math.max(...maxTemp));
+        let minTemp = [
+          dailyForecast[7].main.temp_min,
+          dailyForecast[6].main.temp_min,
+          dailyForecast[5].main.temp_min,
+          dailyForecast[4].main.temp_min,
+          dailyForecast[3].main.temp_min,
+          dailyForecast[2].main.temp_min,
+          dailyForecast[1].main.temp_min,
+          dailyForecast[0].main.temp_min
+        ];
+
+         min.push(Math.min(...minTemp)); 
+      };
       sixPm.forEach(day => {
         let date = new Date(day.dt_txt)
         let days = date.toLocaleString("en", { weekday: "long" });
@@ -53,7 +82,7 @@ if(!navigator.geolocation){
         <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" />
         <div class="description">${day.weather[0].description}</div>
         <div class="temp">
-          <span class="high">${day.main.temp_max.toFixed(0)}℃</span>/<span class="low">${day.main.temp_min.toFixed(0)}℃</span>
+          <span class="high">${max.pop().toFixed(0}℃</span>/<span class="low">${min.pop().toFixed(0}℃</span>
         </div>
       </div>
         `)
