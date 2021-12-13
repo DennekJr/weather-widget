@@ -89,8 +89,6 @@ if(!navigator.geolocation){
       </div>
         `)
       })
-
-      // if()
     })
   })
 }
