@@ -35,7 +35,7 @@ if(!navigator.geolocation){
       <h2>Current Conditions</h2>
       <img src="http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png" />
       <div class="current">
-        <div class="temp">${weatherData.main.temp}℃</div>
+        <div class="temp">${weatherData.main.temp.toFixed(0)}℃</div>
         <div class="condition">${weatherData.weather[0].description}</div>
       </div>
       `)
@@ -53,7 +53,7 @@ if(!navigator.geolocation){
         <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" />
         <div class="description">${day.weather[0].description}</div>
         <div class="temp">
-          <span class="high">${day.main.temp_max}℃</span>/<span class="low">${day.main.temp_min}℃</span>
+          <span class="high">${day.main.temp_max.toFixed(0)}℃</span>/<span class="low">${day.main.temp_min.toFixed(0)}℃</span>
         </div>
       </div>
         `)
