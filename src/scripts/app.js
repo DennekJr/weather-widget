@@ -1,5 +1,7 @@
 let lat;
 let lon;
+let max = [];
+let min = [];
 const currentWeather = document.querySelector('.current-conditions');
 const weeklyForecast = document.querySelector('.forecast');
 
