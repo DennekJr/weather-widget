@@ -82,7 +82,7 @@ if(!navigator.geolocation){
         <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" />
         <div class="description">${day.weather[0].description}</div>
         <div class="temp">
-          <span class="high">${max.pop().toFixed(0}℃</span>/<span class="low">${min.pop().toFixed(0}℃</span>
+          <span class="high">${max.pop().toFixed(0)}℃</span>/<span class="low">${min.pop().toFixed(0)}℃</span>
         </div>
       </div>
         `)
